@@ -61,6 +61,7 @@
 // export default App;
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import "./App.css";
 
 function App() {
   const [items, setItems] = useState([]);
@@ -155,26 +156,52 @@ function App() {
   // };
 
   return (
-    <div>
-      <h1>CRUD App</h1>
-      <ul>
+    <div className="app-container">
+      <h1 className="app-header">CRUD App</h1>
+      <ul className="item-list">
         {items.map((item) => (
-          <li key={item._id}>
-            {item.name} - {item.description}
-            <button onClick={() => deleteItem(item._id)}>Delete</button>
-            <button onClick={() => updateItem(item._id)}>Update</button>
+          <li key={item._id} className="list-item">
+            <div className="item-info">
+              <strong>{item.name}</strong> - {item.description}
+            </div>
+            <div className="item-actions">
+              <button
+                onClick={() => deleteItem(item._id)}
+                className="delete-button"
+              >
+                Delete
+              </button>
+              <button
+                onClick={() => updateItem(item._id)}
+                className="update-button"
+              >
+                Update
+              </button>
+            </div>
           </li>
         ))}
       </ul>
-      <div>
-        <h2>Add Item</h2>
-        <label>Name: </label>
-        <input type="text" onChange={(e) => setName(e.target.value)} />
+      <div className="add-item-container">
+        <h2 className="add-item-header">Add Item</h2>
+        <label className="input-label">Name:</label>
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="input-field"
+        />
         <br />
-        <label>Description: </label>
-        <input type="text" onChange={(e) => setDescription(e.target.value)} />
+        <label className="input-label">Description:</label>
+        <input
+          type="text"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          className="input-field"
+        />
         <br />
-        <button onClick={addItem}>Add Item</button>
+        <button onClick={addItem} className="add-button">
+          Add Item
+        </button>
       </div>
     </div>
   );
